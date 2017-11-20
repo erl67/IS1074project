@@ -1,4 +1,4 @@
-package part1;
+package is1074.password;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

@@ -1,4 +1,4 @@
-package part1;
+package is1074.password;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,31 +8,31 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class FileManager {
-	
-	public static void writeUser (String userName, String pwdHash) {
+
+	public static void writeUser(String userName, String pwdHash) {
 		final String SPLIT = "@@";
 		final String fileName = "users.txt";
 		try {
 			FileWriter fw = new FileWriter(fileName, true);
-			BufferedWriter bw = new BufferedWriter(fw);      
-				bw.write(userName + SPLIT + pwdHash);
-				bw.newLine();
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(userName + SPLIT + pwdHash);
+			bw.newLine();
 			bw.close();
 			fw.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	public static HashMap<String, String> readUsers (){
+
+	public static HashMap<String, String> readUsers() {
 		final String SPLIT = "@@";
 		final String fileName = "users.txt";
 
 		HashMap<String, String> userMap = new HashMap<String, String>();
 
 		try {
-			FileReader fr = new FileReader(fileName); 
-			BufferedReader br = new BufferedReader(fr); 
+			FileReader fr = new FileReader(fileName);
+			BufferedReader br = new BufferedReader(fr);
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				String[] lineParts = line.split(SPLIT);
@@ -45,17 +45,18 @@ public class FileManager {
 		}
 		return userMap;
 	}
-	
-	public static ArrayList<String> getDictionary (){
+
+	public static ArrayList<String> getDictionary() {
 		final String fileName = "dictionary.txt";
 		ArrayList<String> wordList = new ArrayList<String>();
 
 		try {
-			FileReader fr = new FileReader(fileName); 
-			BufferedReader br = new BufferedReader(fr); 
+			FileReader fr = new FileReader(fileName);
+			BufferedReader br = new BufferedReader(fr);
 			String line = null;
 			while ((line = br.readLine()) != null) {
-				if (!line.isEmpty()) wordList.add(line);
+				if (!line.isEmpty())
+					wordList.add(line);
 			}
 			br.close();
 			fr.close();

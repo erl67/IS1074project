@@ -1,19 +1,15 @@
-package part2;
+package is1074.password;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import part1.FileManager;
-import part1.JavaMD5Hash;
-
-import com.google.common.base.Stopwatch;	//using Guava timer
-
+import com.google.common.base.Stopwatch; //using Guava timer
 
 public class PasswordCracker {
 
 	public static void main(String[] args) {
-		
+
 		HashMap<String, String> userMap = FileManager.readUsers();
 		ArrayList<String> wordList = FileManager.getDictionary();
 
@@ -34,16 +30,15 @@ public class PasswordCracker {
 			}
 		}
 	}
-	
-	public static boolean crackPassword (String testPassword, ArrayList<String> wordList) {
-		
+
+	public static boolean crackPassword(String testPassword, ArrayList<String> wordList) {
+
 		boolean cracked = false;
-		
+
 		// crack type1 plain words first
 		for (String plaintext : wordList) {
 			if (JavaMD5Hash.md5(plaintext).equals(testPassword)) {
 				System.out.println("Password match: " + plaintext);
-				//timer.stop();
 				cracked = true;
 			}
 		}
