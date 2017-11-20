@@ -11,7 +11,7 @@ public class PasswordCracker {
 	public static void main(String[] args) {
 
 		HashMap<String, String> userMap = FileManager.readUsers();
-		ArrayList<String> wordList = FileManager.getDictionary();
+		ArrayList<String> wordList = FileManager.getDictionary(3);	//Optimized to only use words of minimum length, based on password rules
 
 		System.out.print("Enter username of password to crack: ");
 		Scanner scanner = new Scanner(System.in);
@@ -44,10 +44,13 @@ public class PasswordCracker {
 		}
 
 		if (!cracked) {
+			System.out.println("No match with dictionary words, trying special characters");
 
 			// build array of possible special combinations, could use
 			// string.tochararray() but faster to do indvidually
 			char[] chars = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '!', '@', '#', '$', '%', '^', '&', '*', '(', '0', '{', '}', '-' };
+			//char[] chars = { '1', '!'}; //chair1! = 1.089 s
+
 			ArrayList<String> charCombos = new ArrayList<String>();
 
 			for (char special0 : chars) {
@@ -58,20 +61,20 @@ public class PasswordCracker {
 			}
 
 			for (String plaintext : wordList) {
-				
+				System.out.println(plaintext);
 				ArrayList<String> type2words = new ArrayList<String>();
 
 				for (String outer : charCombos) {		//create all type 2 passwords for a given word.
 					type2words.add(plaintext + outer);
 					type2words.add(outer + plaintext);
-					System.out.println(plaintext + outer + "\t" + outer + plaintext);
+					//System.out.println(plaintext + outer + "\t" + outer + plaintext);
 					for (String inner : charCombos) {
 						type2words.add(outer + plaintext + inner);
 					}
 				}
 				
 				for (String type2plaintext : type2words) {		//test hash of new type2 words against password hash
-					System.out.println(type2plaintext);
+					//System.out.println(type2plaintext);
 					if (JavaMD5Hash.md5(type2plaintext).equals(testPassword)) {
 						System.out.println("Password match: " + type2plaintext);
 						cracked = true;

@@ -20,7 +20,7 @@ public class AddUser {
 		do {
 			System.out.print("Enter username: ");
 			userName = scanner.nextLine();
-			userName = (userMap.get(userName) != null) ? null : userName;
+			userName = (userMap.get(userName) == null) ? userName : null;
 			if (userName==null) System.out.println("Username already taken. Try again.\n");
 		} while (userName == null);
 

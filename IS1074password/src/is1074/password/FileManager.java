@@ -46,7 +46,11 @@ public class FileManager {
 		return userMap;
 	}
 
-	public static ArrayList<String> getDictionary() {
+	/**
+	 * @param minLength minimum length of word to check
+	 * @return arraylist of dictionary words
+	 */
+	public static ArrayList<String> getDictionary(int minLength) {
 		final String fileName = "dictionary.txt";
 		ArrayList<String> wordList = new ArrayList<String>();
 
@@ -56,7 +60,7 @@ public class FileManager {
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				if (!line.isEmpty())
-					wordList.add(line);
+					if (line.length() > minLength) wordList.add(line);
 			}
 			br.close();
 			fr.close();
