@@ -1,5 +1,6 @@
 package is1074.password;
 
+import java.util.HashMap;
 /**
  * Class AddUser
  * author : ERL67
@@ -11,13 +12,20 @@ public class AddUser {
 
 	public static void main(String[] args) {
 
+		HashMap<String, String> userMap = FileManager.readUsers();
 		Scanner scanner = new Scanner(System.in);
+		String userName = null;
+		String password;
 
-		System.out.print("Enter username: ");
-		String userName = scanner.nextLine();
+		do {
+			System.out.print("Enter username: ");
+			userName = scanner.nextLine();
+			userName = (userMap.get(userName) != null) ? null : userName;
+			if (userName==null) System.out.println("Username already taken. Try again.\n");
+		} while (userName == null);
 
 		System.out.print("Enter password: ");
-		String password = scanner.nextLine();
+		password = scanner.nextLine();
 		scanner.close();
 
 		if (userName.isEmpty() || password.isEmpty()) {
