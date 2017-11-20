@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class JavaMD5Hash {
+public abstract class JavaMD5Hash {
 	public static void main(String[] args) {
 		String password = "prevention";
 		System.out.println("MD5 in hex: " + md5(password));
