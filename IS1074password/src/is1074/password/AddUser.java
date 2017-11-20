@@ -1,11 +1,6 @@
 package is1074.password;
 
 import java.util.HashMap;
-/**
- * Class AddUser
- * author : ERL67
- * created: 11/19/2017
- */
 import java.util.Scanner;
 
 public class AddUser {
@@ -13,14 +8,15 @@ public class AddUser {
 	public static void main(String[] args) {
 
 		HashMap<String, String> userMap = FileManager.readUsers();
+		userMap.replaceAll((k,v)->null);
 		Scanner scanner = new Scanner(System.in);
 		String userName = null;
-		String password;
-
+		String password = null;
+		
 		do {
 			System.out.print("Enter username: ");
 			userName = scanner.nextLine();
-			userName = (userMap.get(userName) == null) ? userName : null;
+			userName = (userMap.containsKey(userName)) ? null : userName;
 			if (userName==null) System.out.println("Username already taken. Try again.\n");
 		} while (userName == null);
 

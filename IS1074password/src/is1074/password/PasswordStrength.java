@@ -39,8 +39,8 @@ public class PasswordStrength {
 			for (char special : chars)
 				if (testPassword.indexOf(special) != -1)
 					strengthScore += 2;
-			for (char special : nums)
-				if (testPassword.indexOf(special) != -1)
+			for (char numeral : nums)
+				if (testPassword.indexOf(numeral) != -1)
 					strengthScore++;
 
 			if (strong == true)
