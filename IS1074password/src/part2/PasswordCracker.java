@@ -7,15 +7,13 @@ import java.util.Scanner;
 import part1.FileManager;
 import part1.JavaMD5Hash;
 
-import com.google.common.base.Stopwatch;
+import com.google.common.base.Stopwatch;	//using Guava timer
 
 
 public class PasswordCracker {
 
 	public static void main(String[] args) {
 		
-		Stopwatch timer = Stopwatch.createUnstarted();
-
 		HashMap<String, String> userMap = FileManager.readUsers();
 		ArrayList<String> wordList = FileManager.getDictionary();
 
@@ -27,15 +25,13 @@ public class PasswordCracker {
 		String testPassword = userMap.get(userName);
 		if (testPassword == null) {
 			System.out.println("Not a valid user");
-			return;
-		}
-		
-		timer.start();
-		
-		if (crackPassword(testPassword, wordList)) {
-			System.out.println("\nElapsed time: " + timer.toString());
 		} else {
-			System.out.println("Unable to crack the password after " + timer.toString());
+			Stopwatch timer = Stopwatch.createStarted();
+			if (crackPassword(testPassword, wordList)) {
+				System.out.println("\nElapsed time: " + timer.toString());
+			} else {
+				System.out.println("Unable to crack the password after " + timer.toString());
+			}
 		}
 	}
 	
@@ -94,28 +90,3 @@ public class PasswordCracker {
 	}
 
 }
-
-
-//3 length special chars, takes forever to crack
-//for (int i = 0; i < chars.length; i++) {
-//	charCombos.add(String.valueOf(chars[i]));
-//	for (int j = 0; j < chars.length; j++) {
-//		charCombos.add(String.valueOf(chars[i]) + String.valueOf(chars[j]));
-//		for (int k = 0; k < chars.length; k++) {
-//			charCombos.add(String.valueOf(chars[i]) + String.valueOf(chars[j]) + String.valueOf(chars[k]));
-//		}
-//	}
-//}
-
-//was working on longer lengths of special characters, until realizing it would take months to crack more than a few
-//for (char special0: chars) {
-//	String combo = String.valueOf(special0);
-//	charCombos.add(combo);
-//	int x = 0;
-//	while (combo.length() < 5) {
-//		for (int i = 1; i < x; i++) {
-//			combo+= String.valueOf(chars[i]);
-//			charCombos.add(combo);
-//		}
-//	}
-//}
