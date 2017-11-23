@@ -27,7 +27,7 @@ public class AddUser {
 		if (userName.isEmpty() || password.isEmpty()) {
 			System.out.println("\nInvalid input. Try Again.");
 		} else {
-			String pwdHash = JavaMD5Hash.md5(password);
+			String pwdHash = FileManager.md5(password);
 			System.out.println("\nYour username: " + userName);
 			System.out.println("\nYour password: " + password);
 			System.out.println("\nPassword MD5: " + pwdHash);

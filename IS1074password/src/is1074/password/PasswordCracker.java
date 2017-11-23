@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import com.google.common.base.Stopwatch; //using Guava timer
+import com.google.common.base.Stopwatch; //using guava timer
 
 public class PasswordCracker {
 
@@ -38,7 +38,7 @@ public class PasswordCracker {
 
 		// crack type1 words first
 		for (String plaintext : wordList) {
-			if (JavaMD5Hash.md5(plaintext).equals(testPassword)) {
+			if (FileManager.md5(plaintext).equals(testPassword)) {
 				System.out.println("Password match: " + plaintext);
 				cracked = true;
 			}
@@ -93,7 +93,7 @@ public class PasswordCracker {
 				}
 
 				for (String type2plaintext : type2words) { // test hash of new type2 words against password hash
-					if (JavaMD5Hash.md5(type2plaintext).equals(testPassword)) {
+					if (FileManager.md5(type2plaintext).equals(testPassword)) {
 						System.out.println("Password match: " + type2plaintext);
 						cracked = true;
 						return cracked;

@@ -18,7 +18,7 @@ public class AuthenticateUser {
 		HashMap<String, String> userMap = FileManager.readUsers();
 
 		if (userMap.containsKey(userName)) {
-			if (userMap.get(userName).equals(JavaMD5Hash.md5(password))) {
+			if (userMap.get(userName).equals(FileManager.md5(password))) {
 				System.out.println("Welcome back " + userName);
 			} else {
 				System.out.println("No");
