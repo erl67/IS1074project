@@ -27,7 +27,11 @@ public class FileManager {
 		}
 	}
 
-	public static HashMap<String, String> readUsers() {
+	/**
+	 * @param getPwdHash boolean to determine if add md5 value to hashmap
+	 * @return hashmap key of username, value of md5 for pwd or null
+	 */
+	public static HashMap<String, String> readUsers(boolean getPwdHash) {
 		final String SPLIT = "@@";
 		final String fileName = "users.txt";
 
@@ -38,8 +42,13 @@ public class FileManager {
 			BufferedReader br = new BufferedReader(fr);
 			String line = null;
 			while ((line = br.readLine()) != null) {
-				String[] lineParts = line.split(SPLIT);
-				userMap.put(lineParts[0], lineParts[1]);
+				String[] lineParts = line.split(SPLIT);	//prevent exposing hash when not necessary
+				if (getPwdHash == true) {
+					userMap.put(lineParts[0], lineParts[1]);
+				} else {
+					userMap.put(lineParts[0], null);
+				}
+				
 			}
 			br.close();
 			fr.close();

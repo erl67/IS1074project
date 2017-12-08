@@ -15,7 +15,7 @@ public class AuthenticateUser {
 		String password = scanner.nextLine();
 		scanner.close();
 
-		HashMap<String, String> userMap = FileManager.readUsers();
+		HashMap<String, String> userMap = FileManager.readUsers(true);
 
 		if (userMap.containsKey(userName)) {
 			if (userMap.get(userName).equals(FileManager.md5(password))) {

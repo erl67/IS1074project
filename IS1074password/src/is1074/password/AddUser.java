@@ -7,8 +7,8 @@ public class AddUser {
 
 	public static void main(String[] args) {
 
-		HashMap<String, String> userMap = FileManager.readUsers();
-		userMap.replaceAll((k,v)->null);
+		HashMap<String, String> userMap = FileManager.readUsers(false);
+
 		Scanner scanner = new Scanner(System.in);
 		String userName = null;
 		String password = null;
